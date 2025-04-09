@@ -1,8 +1,9 @@
 import TodoItem from "./todo-item";
 
 export default class TodoList {
-  constructor() {
+  constructor(id) {
     this.list = [];
+    this.id = id;
   }
 
   addItem(title, description, dueDate, priorityLevel) {
