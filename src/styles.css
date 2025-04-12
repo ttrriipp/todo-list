@@ -1,0 +1,214 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+body {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    height: 100vh;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* sidebar content */
+aside {
+    background-color: hsl(0, 0%, 90%);
+    grid-row: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.logo-title {
+    font-size: 4rem;
+    font-style: italic;
+}
+
+.project-tab {
+    width: 90%;
+    background-color: hsl(0, 0%, 90%);
+    border-radius: 8px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    font-size: 2em;
+    color: black;
+}
+
+.project-tab:hover {
+    background-color: hsl(0, 0%, 95%);
+}
+
+.project-tab:active {
+    background-color: hsl(0, 0%, 100%);
+}
+
+.project-section-label {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 30px;
+    margin-bottom: 5px;
+}
+
+.project-section-label .title {
+    font-size: 2em;
+}
+
+.create-project-button {
+    width: 40px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    background-color: hsl(0, 0%, 90%);
+}
+
+.create-project-button:hover {
+    background-color: hsl(0, 0%, 95%);
+}
+
+.create-project-button:active {
+    background-color: hsl(0, 0%, 100%);
+}
+
+.project-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.create-project-dialog {
+    border: solid;
+    height: 100px;
+    width: 300px;
+    margin: auto;
+}
+
+.create-project-dialog>form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+form .input-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+    margin-bottom: 10px;
+}
+
+form .button-row {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+
+/* main content */
+
+main {
+    background-color: hsl(0, 0%, 100%);
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    gap: 10px;
+}
+
+main>.project-title {
+    align-self: start;
+    font-size: 3rem;
+}
+
+
+.task-section {
+    width: 90%;
+    position: relative;
+    height: 100%;
+}
+
+.task-card {
+    display: flex;
+    border-radius: 8px;
+    border: 2px solid;
+    text-decoration: none;
+    color: black;
+    height: 50px;
+    width: 100%;
+    padding: 10px;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.task-card>.title {
+    width: 200px;
+}
+
+.task-card>.description {
+    width: 600px;
+}
+
+.task-card input[type='checkbox'] {
+    width: 20px;
+}
+
+.task-card[data-priority-level="low"] {
+    border-color: red;
+}
+
+.task-card[data-priority-level="medium"] {
+    border-color: green;
+}
+
+.task-card[data-priority-level="high"] {
+    border-color: blue;
+}
+
+.task-card:hover {
+    background-color: rgb(255, 255, 255);
+}
+
+.task-card[data-completed="true"] {
+    background-color: gray;
+}
+
+.add-task-button {
+    position: fixed;
+    width: 100px;
+    border-radius: 8px;
+    right: 80px;
+    bottom: 40px;
+    padding: 10px;
+    background-color: hsl(120, 72%, 48%);
+    color: white;
+}
+
+.add-task-button:hover {
+    background-color: hsl(120, 72%, 52%);
+}
+
+.add-task-button:active {
+    background-color: hsl(120, 72%, 55%);
+}
+
+.add-task-dialog {
+    margin: auto;
+    padding: 20px;
+}
+
+.task-details {
+    height: 500px;
+    width: 700px;
+}

@@ -4,6 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
-  <body></body>
+  <body>
+    <main>
+      <h2 class="project-title">all tasks</h2>
+      <h3>Tasks</h3>
+      <section class="task-section"></section>
+      <dialog class="task-details"></dialog>
+
+      <dialog class="add-task-dialog">
+        <form method="dialog" id="add-task-form">
+          <div class="input-row">
+            <label for="title">title:</label>
+            <input id="title" type="text" required />
+          </div>
+          <div class="input-row">
+            <label for="description">description: </label>
+            <input id="description" type="text" required />
+          </div>
+          <div class="input-row">
+            <label for="due-date">due date:</label>
+            <input id="due-date" type="date" required />
+          </div>
+          <div class="input-row">
+            <label for="priority-level">priority level:</label>
+            <select name="priority-level" id="priority-level" required>
+              <option value="">choose a level</option>
+              <option value="high">high</option>
+              <option value="medium">medium</option>
+              <option value="low">low</option>
+            </select>
+          </div>
+          <div class="button-row">
+            <button class="cancel-button">cancel</button>
+            <button class="add-button">add</button>
+          </div>
+        </form>
+      </dialog>
+      <button class="add-task-button">add new task</button>
+    </main>
+
+    <aside>
+      <h1 class="logo-title">IDOIT</h1>
+      <div class="project-section-label">
+        <h2 class="title">projects</h2>
+        <button class="create-project-button">+</button>
+      </div>
+      <section class="project-section"></section>
+      <dialog class="create-project-dialog">
+        <form method="dialog" id="create-project-form">
+          <div class="input-row">
+            <label for="project-name">project name: </label>
+            <input id="project-name" type="text" required />
+          </div>
+          <div class="button-row">
+            <button class="cancel-button">cancel</button>
+            <button class="create-button">create</button>
+          </div>
+        </form>
+      </dialog>
+    </aside>
+  </body>
 </html>

@@ -2,21 +2,21 @@ export default class TodoItem {
   constructor(title, description, dueDate, priorityLevel) {
     this.title = title;
     this.description = description;
-    this.dueDate = dueDate;
+    this.dueDate = "due date: " + dueDate;
     this.priorityLevel = priorityLevel;
+    this.completed = false;
     this.id = Date.now();
-    this.complete = false;
   }
 
   toggleStatus() {
-    this.complete = this.complete == false ? true : false;
+    this.complete = this.completed == false ? true : false;
   }
 
   rename(newName) {
-    this.name = newName;
+    this.title = newName;
   }
 
-  editDescription(newDescription) {
+  changeDescription(newDescription) {
     this.description = newDescription;
   }
 
