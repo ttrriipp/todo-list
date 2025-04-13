@@ -9,7 +9,7 @@ export default class TodoItem {
   }
 
   toggleStatus() {
-    this.complete = this.completed == false ? true : false;
+    this.completed = !this.completed;
   }
 
   rename(newName) {

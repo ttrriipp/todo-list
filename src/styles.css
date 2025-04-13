@@ -126,11 +126,31 @@ main {
     gap: 10px;
 }
 
-main>.project-title {
+.project-title {
     align-self: start;
     font-size: 3rem;
 }
 
+.project-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-header .delete-project-button {
+    width: 100px;
+    height: 50px;
+    border-radius: 8px;
+    background-color: red;
+    color: white;
+}
+
+.project-header .delete-project-button:hover {
+    background-color: hsl(0, 100%, 65%);
+}
+
+.project-header .delete-project-button:active {
+    background-color: hsl(0, 100%, 70%);
+}
 
 .task-section {
     width: 90%;
@@ -182,6 +202,12 @@ main>.project-title {
 
 .task-card[data-completed="true"] {
     background-color: gray;
+    color: white;
+    border-color: black;
+}
+
+.task-card[data-completed="true"]:hover {
+    background-color: hsl(0, 0%, 60%);
 }
 
 .add-task-button {

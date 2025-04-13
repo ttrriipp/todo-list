@@ -28,18 +28,16 @@ export function displayProjects() {
 }
 
 export function displayProjectTodo(projectId) {
-  if (controller.getProject(projectId) == controller.getProjectList()[0]) {
-    const taskSection = document.querySelector(".task-section");
-    taskSection.textContent = "";
-    controller.getProjectList().forEach((project) => {
-      project.taskList.forEach((item) => {
-        createTodoItem(item);
-      });
-    });
+  if (!projectId) {
+    currentProjectId = controller.getProjectList()[0].id;
+    displayProjectTodo(currentProjectId);
+    const projectTitle = document.querySelector(".project-title");
+    projectTitle.textContent = controller.getProject(currentProjectId).name;
     return;
   }
   const todoList = controller.getProject(projectId).taskList;
   const taskSection = document.querySelector(".task-section");
+  removeProjectFunctionality(projectId).displayRemoveButton();
   taskSection.textContent = "";
   todoList.forEach((item) => {
     createTodoItem(item);
@@ -76,7 +74,6 @@ function createTodoItem(item) {
   checkBox.checked = item.completed;
   todoItem.dataset.priorityLevel = item.priorityLevel;
   todoItem.dataset.id = item.id;
-  checkBox.dataset.id = item.id;
   todoItem.dataset.completed = item.completed;
 
   todoItem.classList.add("task-card");
@@ -145,9 +142,79 @@ function createTodoItem(item) {
               taskDueDate.value,
               taskPriorityLevel.value
             );
+          controller.addTaskToAllTask(
+            taskTitle.value,
+            taskDescription.value,
+            taskDueDate.value,
+            taskPriorityLevel.value
+          );
           displayProjectTodo(currentProjectId);
           controller.saveData();
         }
     }
   });
+})();
+
+// remove functionality for projects
+function removeProjectFunctionality(id) {
+  // display remove button
+  const displayRemoveButton = function () {
+    // if the task is not the default task which is the all tasks
+    // then display the remove button
+    if (controller.getProject(id) === controller.getProjectList()[0]) {
+      const projectHeaderButtonContainer = document.querySelector(
+        ".project-header .button-container"
+      );
+      projectHeaderButtonContainer.textContent = "";
+    } else {
+      const projectHeaderButtonContainer = document.querySelector(
+        ".project-header .button-container"
+      );
+      const deleteProjectButton = document.createElement("button");
+      deleteProjectButton.classList.add("delete-project-button");
+      deleteProjectButton.textContent = "delete project";
+
+      projectHeaderButtonContainer.textContent = "";
+
+      projectHeaderButtonContainer.appendChild(deleteProjectButton);
+      deleteProject(deleteProjectButton);
+    }
+  };
+
+  //event listener for that (deletes the project from the list)
+  const deleteProject = (button) => {
+    button.addEventListener("click", () => {
+      controller.removeProject(id);
+      displayProjects();
+      displayProjectTodo();
+    });
+  };
+
+  return { displayRemoveButton };
+}
+
+(function toggleTaskStatusFunctionality() {
+  const taskSection = document.querySelector(".task-section");
+  taskSection.addEventListener("click", (event) => {
+    // toggle task's completed status
+    const button = event.target.closest(".task-card");
+    if (!button) return;
+    toggleTaskStatus(button);
+  });
+
+  const toggleTaskStatus = function (button) {
+    const currentProject = controller.getProject(currentProjectId);
+    const task = controller.getProjectTodoItem(
+      currentProject,
+      Number(button.dataset.id)
+    );
+    task.toggleStatus();
+    controller.saveData();
+    button.dataset.completed = task.completed;
+
+    const checkbox = button.querySelector("input[type='checkbox']");
+    if (checkbox) {
+      checkbox.checked = task.completed;
+    }
+  };
 })();
