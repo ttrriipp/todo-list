@@ -276,8 +276,8 @@ export default function DisplayController() {
       const cancelButton = editTaskForm.querySelector(".cancel-button");
       const editButton = editTaskForm.querySelector(".edit-button");
 
-      cancelButton.addEventListener("click", (e) => {
-        e.preventDefault();
+      cancelButton.addEventListener("click", (ee) => {
+        ee.preventDefault();
         editTaskDialog.close();
       });
 
