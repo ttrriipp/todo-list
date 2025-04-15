@@ -14,37 +14,6 @@
       </div>
       <h3>Tasks</h3>
       <section class="task-section"></section>
-      <dialog class="task-details"></dialog>
-
-      <dialog class="add-task-dialog">
-        <form method="dialog" id="add-task-form">
-          <div class="input-row">
-            <label for="title">title:</label>
-            <input id="title" type="text" required />
-          </div>
-          <div class="input-row">
-            <label for="description">description: </label>
-            <input id="description" type="text" required />
-          </div>
-          <div class="input-row">
-            <label for="due-date">due date:</label>
-            <input id="due-date" type="date" required />
-          </div>
-          <div class="input-row">
-            <label for="priority-level">priority level:</label>
-            <select name="priority-level" id="priority-level" required>
-              <option value="">choose a level</option>
-              <option value="high">high</option>
-              <option value="medium">medium</option>
-              <option value="low">low</option>
-            </select>
-          </div>
-          <div class="button-row">
-            <button class="cancel-button">cancel</button>
-            <button class="add-button">add</button>
-          </div>
-        </form>
-      </dialog>
       <button class="add-task-button">add new task</button>
     </main>
 
@@ -55,18 +24,80 @@
         <button class="create-project-button">+</button>
       </div>
       <section class="project-section"></section>
-      <dialog class="create-project-dialog">
-        <form method="dialog" id="create-project-form">
-          <div class="input-row">
-            <label for="project-name">project name: </label>
-            <input id="project-name" type="text" required />
-          </div>
-          <div class="button-row">
-            <button class="cancel-button">cancel</button>
-            <button class="create-button">create</button>
-          </div>
-        </form>
-      </dialog>
     </aside>
+
+    <dialog class="add-task-dialog">
+      <form method="dialog" id="add-task-form">
+        <div class="input-row">
+          <label for="title">title:</label>
+          <input id="title" type="text" maxlength="10" required />
+        </div>
+        <div class="input-row">
+          <label for="description">description: </label>
+          <input id="description" type="text" maxlength="20" required />
+        </div>
+        <div class="input-row">
+          <label for="due-date">due date:</label>
+          <input id="due-date" type="date" required />
+        </div>
+        <div class="input-row">
+          <label for="priority-level">priority level:</label>
+          <select name="priority-level" id="priority-level" required>
+            <option value="">choose a level</option>
+            <option value="high">high</option>
+            <option value="medium">medium</option>
+            <option value="low">low</option>
+          </select>
+        </div>
+        <div class="button-row">
+          <button class="cancel-button">cancel</button>
+          <button class="add-button">add</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="create-project-dialog">
+      <form method="dialog" id="create-project-form">
+        <div class="input-row">
+          <label for="project-name">project name: </label>
+          <input id="project-name" type="text" required />
+        </div>
+        <div class="button-row">
+          <button class="cancel-button">cancel</button>
+          <button class="create-button">create</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog class="edit-task-dialog">
+      <form method="dialog" id="edit-task-form">
+        <h2>edit task</h2>
+        <div class="input-row">
+          <label for="edit-title">title:</label>
+          <input id="edit-title" type="text" maxlength="25" required />
+        </div>
+        <div class="input-row">
+          <label for="edit-description">description:</label>
+          <input id="edit-description" type="text" maxlength="40" required />
+        </div>
+        <div class="input-row">
+          <label for="edit-due-date">due date:</label>
+          <input id="edit-due-date" type="date" required />
+        </div>
+        <div class="input-row">
+          <label for="edit-priority-level">priority level:</label>
+          <select name="edit-priority-level" id="edit-priority-level" required>
+            <option value="">choose a level</option>
+            <option value="high">high</option>
+            <option value="medium">medium</option>
+            <option value="low">low</option>
+          </select>
+        </div>
+        <div class="button-row">
+          <button class="cancel-button">cancel</button>
+          <button class="add-button">add</button>
+        </div>
+      </form>
+    </dialog>
   </body>
 </html>

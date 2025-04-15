@@ -16,7 +16,6 @@ export default function DisplayController() {
 
       currentProjectId = selectedProjectId;
       displayProjectTodo(selectedProjectId);
-      projectTitle.textContent = Controller.getProject(selectedProjectId).name;
     }
   })();
 
@@ -29,11 +28,14 @@ export default function DisplayController() {
   }
 
   function displayProjectTodo(projectId) {
+    const projectTitle = document.querySelector(".project-title");
     const allTaskProject = Controller.getProjectList()[0];
     const taskSection = document.querySelector(".task-section");
     const project = Controller.getProject(projectId);
     const todoList = project.taskList;
     const projectList = Controller.getProjectList();
+    projectTitle.textContent = Controller.getProject(projectId).name;
+
     displayRemoveButton();
 
     if (projectId === allTaskProject.id) {
@@ -64,24 +66,31 @@ export default function DisplayController() {
   function createTodoItem(item) {
     const taskSection = document.querySelector(".task-section");
 
+    const todoItemContainer = document.createElement("div");
     const todoItem = document.createElement("button");
     const checkBox = document.createElement("input");
     const todoTitle = document.createElement("h4");
     const description = document.createElement("p");
     const dueDate = document.createElement("span");
+    const editButton = document.createElement("button");
+    const removeButton = document.createElement("button");
 
     todoTitle.classList.add("title");
-    description.classList.add("description");
-    dueDate.classList.add("due-date");
-
     todoTitle.textContent = item.title;
+    description.classList.add("description");
     description.textContent = item.description;
+    dueDate.classList.add("due-date");
     dueDate.textContent = item.dueDate;
     checkBox.type = "checkbox";
     checkBox.checked = item.completed;
     todoItem.dataset.priorityLevel = item.priorityLevel;
     todoItem.dataset.id = item.id;
     todoItem.dataset.completed = item.completed;
+    editButton.classList.add("edit-button");
+    editButton.textContent = "edit";
+    removeButton.classList.add("remove-button");
+    removeButton.textContent = "remove";
+    todoItemContainer.classList.add("task-card-container");
 
     //loop through each tasks to find the project that has that task
     let projectId;
@@ -93,6 +102,9 @@ export default function DisplayController() {
       });
     });
     todoItem.dataset.projectId = projectId;
+    removeButton.dataset.id = item.id;
+    removeButton.dataset.projectId = projectId;
+    removeTaskFunctionality(removeButton);
 
     todoItem.classList.add("task-card");
 
@@ -101,7 +113,10 @@ export default function DisplayController() {
     todoItem.appendChild(description);
     todoItem.appendChild(dueDate);
 
-    taskSection.appendChild(todoItem);
+    todoItemContainer.appendChild(todoItem);
+    todoItemContainer.appendChild(editButton);
+    todoItemContainer.appendChild(removeButton);
+    taskSection.appendChild(todoItemContainer);
   }
 
   (function InitCreateProjectForm() {
@@ -216,6 +231,21 @@ export default function DisplayController() {
       Controller.saveData();
     };
   })();
+
+  function removeTaskFunctionality(button) {
+    button.addEventListener("click", removeTask);
+
+    function removeTask(e) {
+      const task = e.target;
+      const projectId = task.dataset.projectId;
+      const taskId = task.dataset.id;
+      console.log(Controller.getProjectList());
+      const project = Controller.getProject(projectId);
+      project.removeTask(taskId);
+      Controller.saveData();
+      displayProjectTodo(currentProjectId);
+    }
+  }
 
   displayProjects();
   displayProjectTodo(currentProjectId);

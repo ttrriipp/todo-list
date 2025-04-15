@@ -158,18 +158,48 @@ main {
     height: 100%;
 }
 
+.task-card-container {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 0;
+    height: 60px;
+}
+
+.task-card-container>button {
+    border: 2px solid;
+    border-radius: 8px;
+}
+
+.task-card-container>.edit-button {
+    width: 5%;
+    background-color: hsl(0, 0%, 75%);
+}
+
+.task-card-container>.edit-button:hover {
+    background-color: hsl(0, 0%, 95%);
+}
+
+.task-card-container>.remove-button {
+    width: 5%;
+    background-color: red;
+    color: white;
+    border: 2px solid black;
+}
+
+.task-card-container>.remove-button:hover {
+    background-color: hsl(0, 100%, 70%);
+}
+
+
 .task-card {
     display: flex;
-    border-radius: 8px;
-    border: 2px solid;
     text-decoration: none;
     color: black;
-    height: 50px;
-    width: 100%;
+    width: 90%;
     padding: 10px;
     gap: 10px;
     align-items: center;
-    margin-bottom: 5px;
 }
 
 .task-card>.title {
@@ -237,4 +267,14 @@ main {
 .task-details {
     height: 500px;
     width: 700px;
+}
+
+.edit-task-dialog {
+    margin: auto;
+    padding: 20px;
+    border: solid;
+}
+
+#edit-task-form h2 {
+    text-align: center;
 }

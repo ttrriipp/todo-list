@@ -11,20 +11,4 @@ export default class TodoItem {
   toggleStatus() {
     this.completed = !this.completed;
   }
-
-  rename(newName) {
-    this.title = newName;
-  }
-
-  changeDescription(newDescription) {
-    this.description = newDescription;
-  }
-
-  changeDueDate(newDueDate) {
-    this.dueDate = newDueDate;
-  }
-
-  changePriorityLevel(newPriorityLevel) {
-    this.priorityLevel = newPriorityLevel;
-  }
 }
