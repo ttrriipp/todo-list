@@ -5,7 +5,6 @@ export default function DisplayController() {
 
   (function InitProjectSection() {
     const projectSection = document.querySelector(".project-section");
-    const projectTitle = document.querySelector(".project-title");
     projectSection.addEventListener("click", selectProject);
 
     function selectProject(e) {
@@ -80,11 +79,13 @@ export default function DisplayController() {
     description.classList.add("description");
     description.textContent = item.description;
     dueDate.classList.add("due-date");
-    dueDate.textContent = item.dueDate;
+    dueDate.textContent = "due date: " + item.dueDate;
     checkBox.type = "checkbox";
     checkBox.checked = item.completed;
     todoItem.dataset.priorityLevel = item.priorityLevel;
     todoItem.dataset.id = item.id;
+    removeButton.dataset.id = item.id;
+    editButton.dataset.id = item.id;
     todoItem.dataset.completed = item.completed;
     editButton.classList.add("edit-button");
     editButton.textContent = "edit";
@@ -102,9 +103,11 @@ export default function DisplayController() {
       });
     });
     todoItem.dataset.projectId = projectId;
-    removeButton.dataset.id = item.id;
     removeButton.dataset.projectId = projectId;
     removeTaskFunctionality(removeButton);
+
+    editButton.dataset.projectId = projectId;
+    editTaskFunctionality(editButton);
 
     todoItem.classList.add("task-card");
 
@@ -244,6 +247,51 @@ export default function DisplayController() {
       project.removeTask(taskId);
       Controller.saveData();
       displayProjectTodo(currentProjectId);
+    }
+  }
+
+  function editTaskFunctionality(button) {
+    button.addEventListener("click", openEditTaskDialog);
+    const editTaskDialog = document.querySelector(".edit-task-dialog");
+    const editTitle = document.getElementById("edit-title");
+    const editDescription = document.getElementById("edit-description");
+    const editDueDate = document.getElementById("edit-due-date");
+    const editPriorityLevel = document.getElementById("edit-priority-level");
+
+    function openEditTaskDialog(e) {
+      const taskId = e.target.dataset.id;
+      const projectId = e.target.dataset.projectId;
+      const task = Controller.getProjectTodoItem(
+        Controller.getProject(projectId),
+        taskId
+      );
+      editTitle.value = task.title;
+      editDescription.value = task.description;
+      editDueDate.value = task.dueDate;
+      editPriorityLevel.value = task.priorityLevel;
+
+      editTaskDialog.showModal();
+
+      const editTaskForm = document.querySelector("#edit-task-form");
+      const cancelButton = editTaskForm.querySelector(".cancel-button");
+      const editButton = editTaskForm.querySelector(".edit-button");
+
+      cancelButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        editTaskDialog.close();
+      });
+
+      editButton.addEventListener("click", editTaskDetails);
+
+      function editTaskDetails() {
+        task.title = editTitle.value;
+        task.description = editDescription.value;
+        task.dueDate = editDueDate.value;
+        task.priorityLevel = editPriorityLevel.value;
+        task.title = editTitle.value;
+        Controller.saveData();
+        displayProjectTodo(currentProjectId);
+      }
     }
   }
 
