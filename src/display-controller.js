@@ -283,7 +283,7 @@ export default function DisplayController() {
 
       editButton.addEventListener("click", editTaskDetails);
 
-      function editTaskDetails() {
+      function editTaskDetails(eee) {
         task.title = editTitle.value;
         task.description = editDescription.value;
         task.dueDate = editDueDate.value;
@@ -291,6 +291,7 @@ export default function DisplayController() {
         task.title = editTitle.value;
         Controller.saveData();
         displayProjectTodo(currentProjectId);
+        editTaskDialog.close();
       }
     }
   }
