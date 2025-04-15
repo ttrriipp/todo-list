@@ -5,7 +5,7 @@ export default class TodoItem {
     this.dueDate = "due date: " + dueDate;
     this.priorityLevel = priorityLevel;
     this.completed = false;
-    this.id = Date.now();
+    this.id = crypto.randomUUID();
   }
 
   toggleStatus() {

@@ -1,6 +1,5 @@
 import "./styles.css";
-import Controller from "./controller";
-import { displayProjects, displayProjectTodo } from "./display-controller";
+import DisplayController from "./display-controller";
 
-displayProjects();
-displayProjectTodo(Controller.getProjectList()[0].id);
+//initialize ui what ever
+DisplayController();
