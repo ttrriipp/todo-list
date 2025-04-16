@@ -105,7 +105,6 @@ export default function DisplayController() {
     todoItem.dataset.projectId = projectId;
     removeButton.dataset.projectId = projectId;
     removeTaskFunctionality(removeButton);
-
     editButton.dataset.projectId = projectId;
     editTaskFunctionality(editButton);
 
@@ -242,7 +241,6 @@ export default function DisplayController() {
       const task = e.target;
       const projectId = task.dataset.projectId;
       const taskId = task.dataset.id;
-      console.log(Controller.getProjectList());
       const project = Controller.getProject(projectId);
       project.removeTask(taskId);
       Controller.saveData();
@@ -275,23 +273,27 @@ export default function DisplayController() {
       const editTaskForm = document.querySelector("#edit-task-form");
       const cancelButton = editTaskForm.querySelector(".cancel-button");
       const editButton = editTaskForm.querySelector(".edit-button");
+      editButton.addEventListener("click", editTaskDetails);
 
       cancelButton.addEventListener("click", (ee) => {
         ee.preventDefault();
         editTaskDialog.close();
+        editButton.removeEventListener("click", editTaskDetails);
       });
 
-      editButton.addEventListener("click", editTaskDetails);
-
-      function editTaskDetails(eee) {
-        task.title = editTitle.value;
-        task.description = editDescription.value;
-        task.dueDate = editDueDate.value;
-        task.priorityLevel = editPriorityLevel.value;
-        task.title = editTitle.value;
-        Controller.saveData();
-        displayProjectTodo(currentProjectId);
-        editTaskDialog.close();
+      function editTaskDetails() {
+        if (editTaskForm.checkValidity()) {
+          task.title = editTitle.value;
+          task.description = editDescription.value;
+          task.dueDate = editDueDate.value;
+          task.priorityLevel = editPriorityLevel.value;
+          task.title = editTitle.value;
+          Controller.saveData();
+          displayProjectTodo(currentProjectId);
+          console.log(Controller.getProjectList());
+          editTaskDialog.close();
+          editButton.removeEventListener("click", editTaskDetails);
+        }
       }
     }
   }
